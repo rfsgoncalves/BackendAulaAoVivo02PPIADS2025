@@ -1,0 +1,25 @@
+{
+  "name": "backendaulaaovivo02ppiads2025",
+  "version": "1.0.0",
+  "description": "Projeto Backend PPI ADS 2025",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rfsgoncalves/BackendAulaAoVivo02PPIADS2025.git"
+  },
+  "keywords": [
+    "Backend",
+    "Node",
+    "Javascript",
+    "Mysql"
+  ],
+  "author": "Renato Gonçalves",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rfsgoncalves/BackendAulaAoVivo02PPIADS2025/issues"
+  },
+  "homepage": "https://github.com/rfsgoncalves/BackendAulaAoVivo02PPIADS2025#readme"
+}
