@@ -1,4 +1,4 @@
-import Cliente from "../Models/Cliente.js";
+import Cliente from "../Models/cliente.js";
 import Cidade from "../Models/cidade.js";
 import conectar from "./conexao.js";
 
@@ -55,6 +55,31 @@ export default class ClienteDAO {
         const conexao = await conectar();
         const sql = "SELECT * from Cliente cli INNER JOIN cidade cid ON cid.cid_id = cli.cid_id order by cli.cli_nome";
         const [registros] = await conexao.query(sql);
+        await conexao.release();
+        
+        let listaClientes = [];
+        for (const registro of registros){
+            const cidade = new Cidade(registro.cid_id, registro.cid_nome, registro.cid_uf);
+            const cliente = new Cliente(registro.cli_cpf, 
+                                        registro.cli_nome, 
+                                        registro.cli_sobrenome, 
+                                        registro.cli_nomeUsuario, 
+                                        registro.cli_cep, 
+                                        cidade);
+
+            listaClientes.push(cliente);
+        }
+
+        return listaClientes;
+
+
+    }
+
+    async consultarCPF(cpf){
+        cpf = cpf || ' ';
+        const conexao = await conectar();
+        const sql = "SELECT * from Cliente cli INNER JOIN cidade cid ON cid.cid_id = cli.cid_id where cli.cli_cpf = ? order by cli.cli_nome";
+        const [registros] = await conexao.query(sql,[cpf]);
         await conexao.release();
         
         let listaClientes = [];
