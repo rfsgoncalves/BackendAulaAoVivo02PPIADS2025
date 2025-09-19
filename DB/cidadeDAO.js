@@ -12,9 +12,29 @@ export default class CidadeDAO{
         }
     }
 
-    async alterar(){}
+    async alterar(cidade){
+        if (cidade instanceof Cidade) {
+            const conexao = await conectar();
+            const sql = "update cidade set cid_nome = ?, cid_uf = ? where cid_id = ?"
+            await conexao.query(sql, [cidade.nome, cidade.uf, cidade.id])
+            await conexao.release();
+        }
+    }
 
-    async excluir(){}
+    async excluir(cidade){
+        if (cidade instanceof Cidade) {
+            const conexao = await conectar();
+            const sql = "delete from cidade where cid_id = ?"
+            await conexao.query(sql, [cidade.id])
+            await conexao.release();
+        }
+    }
 
-    async consultar(){}
+    async consultar(){
+        const conexao = await conectar();
+        const sql = "select * from cidade"
+        const [linhas] = await conexao.query(sql)
+        await conexao.release();
+        return linhas.map(linha => new Cidade(linha.cid_id, linha.cid_nome, linha.cid_uf));
+    }
 }

@@ -1,4 +1,4 @@
-const { Router } from "express";
+import { Router } from "express";
 import CidadeController from "../Controllers/cidadeController.js";
 
 const cidadeRouter = Router();
